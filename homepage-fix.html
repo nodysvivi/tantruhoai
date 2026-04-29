@@ -1,0 +1,758 @@
+```html
+<!doctype html>
+<html lang="vi-VN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Người mẹ Tần Trừ Hoài</title>
+    <link rel="stylesheet" href="https://fontsapi.zeoseven.com/292/main/result.css" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
+
+      :root {
+        --bg: #f5f0eb;
+        --card: rgba(250, 246, 241, 0.97);
+        --block: rgba(255, 255, 255, 0.65);
+        --border: rgba(120, 80, 60, 0.13);
+        --border-s: rgba(120, 80, 60, 0.22);
+        --text: #2a1f1a;
+        --sub: #7a6055;
+        --dim: #b0998e;
+        --ink: #c0392b;
+        --ink-s: rgba(192, 57, 43, 0.1);
+        --shadow: 0 6px 28px rgba(80, 40, 20, 0.1);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        background: transparent;
+        color: var(--text);
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .page-wrap {
+        background: var(--bg);
+        border: 1px solid var(--border-s);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        margin: 10px auto;
+        max-width: 800px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Dải trang trí huy hiệu cảnh sát trên cùng */
+      .top-bar {
+        height: 6px;
+        background: linear-gradient(90deg, #8b1a1a 0%, #c0392b 40%, #e8a87c 70%, #c0392b 100%);
+      }
+
+      /* Hoa văn giấy */
+      .page-wrap::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+        padding: 28px 20px 20px;
+      }
+
+      /* ── Khu vực tiêu đề ── */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 16px 0 28px;
+        gap: 10px;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        color: var(--ink);
+        background: var(--ink-s);
+        border: 1px solid rgba(192, 57, 43, 0.22);
+        padding: 4px 14px;
+        border-radius: 999px;
+      }
+
+      .hero-badge::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ink);
+        animation: pulse 2.5s ease-in-out infinite;
+      }
+
+      .hero-title {
+        font-family: 'Noto Serif SC', serif;
+        font-size: 30px;
+        font-weight: 900;
+        color: var(--text);
+        letter-spacing: 0.12em;
+      }
+
+      .hero-sub {
+        font-size: 12px;
+        color: var(--dim);
+        letter-spacing: 0.1em;
+      }
+
+      .hero-divider {
+        width: 48px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--ink), transparent);
+        border-radius: 1px;
+      }
+
+      /* ── Thẻ chung ── */
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border-s);
+        border-radius: 10px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(80, 40, 20, 0.05);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 16px;
+        background: var(--block);
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.08em;
+      }
+
+      .card-header .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .dot-red {
+        background: var(--ink);
+      }
+      .dot-warm {
+        background: #d4845a;
+      }
+      .dot-muted {
+        background: var(--dim);
+      }
+
+      .card-body {
+        padding: 14px 16px;
+      }
+
+      /* ── Tuyên bố ── */
+      .notice {
+        font-size: 13px;
+        color: var(--sub);
+        line-height: 1.65;
+        padding: 12px 14px;
+        background: var(--ink-s);
+        border-left: 3px solid var(--ink);
+        border-radius: 0 6px 6px 0;
+      }
+      .notice strong {
+        color: var(--ink);
+      }
+
+      /* ── Hiển thị ảnh chân dung (Hai nhân vật song song) ── */
+      .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 14px 16px;
+      }
+
+      .portrait-wrap {
+        border: 1px solid var(--border-s);
+        border-radius: 8px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #faf6f1 0%, #f0e8e0 100%);
+      }
+
+      .portrait-btn {
+        display: block;
+        width: 100%;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+        text-align: inherit;
+      }
+
+      .portrait-btn:focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: -2px;
+      }
+
+      .portrait-viewport {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .portrait-img {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #e8ddd5;
+        transition: transform 0.32s ease, filter 0.32s ease, opacity 0.24s ease;
+      }
+
+      .portrait-btn:hover .portrait-img {
+        transform: scale(1.01);
+        filter: saturate(1.04);
+      }
+
+      .portrait-btn.is-flipping .portrait-img {
+        opacity: 0.18;
+        transform: scale(0.985) rotateY(10deg);
+        filter: saturate(0.82);
+      }
+      .portrait-btn:hover .portrait-viewport {
+        filter: saturate(1.05);
+      }
+      .portrait-viewport {
+        transition: filter 0.3s ease;
+      }
+
+      .portrait-tag {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(42, 31, 26, 0.65);
+        color: #fff;
+        pointer-events: none;
+      }
+
+      .portrait-loading {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.94);
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: rgba(250, 246, 241, 0.92);
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.18s,
+          transform 0.18s;
+      }
+
+      .portrait-btn.is-flipping .portrait-loading {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .portrait-loading-dots::after {
+        content: '...';
+        display: inline-block;
+        width: 1.4em;
+        overflow: hidden;
+        vertical-align: bottom;
+        animation: dots 1.2s steps(4, end) infinite;
+      }
+
+      .portrait-caption {
+        padding: 9px 12px;
+        font-size: 11px;
+        color: var(--sub);
+        line-height: 1.6;
+        text-align: center;
+        background: var(--block);
+        border-top: 1px solid var(--border);
+      }
+
+      .portrait-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 2px;
+        font-family: 'Noto Serif SC', serif;
+      }
+
+      /* ── Dòng thông tin ── */
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--border);
+        transition: background 0.18s;
+      }
+      .info-row:last-child {
+        border-bottom: none;
+      }
+      .info-row:hover {
+        background: rgba(192, 57, 43, 0.04);
+      }
+
+      .info-key {
+        font-size: 12px;
+        color: var(--dim);
+        font-weight: 600;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .info-val {
+        font-size: 13px;
+        color: var(--text);
+        font-weight: 500;
+        text-align: right;
+        line-height: 1.5;
+      }
+
+      /* ── Thẻ lời mở đầu ── */
+      .opening-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        padding: 14px 16px;
+      }
+
+      .opening-card {
+        background: var(--block);
+        border: 1px solid var(--border-s);
+        border-radius: 8px;
+        padding: 16px 14px;
+        cursor: pointer;
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .opening-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--ink);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+
+      .opening-card:hover {
+        border-color: var(--ink);
+        background: rgba(192, 57, 43, 0.04);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(192, 57, 43, 0.1);
+      }
+
+      .opening-card:hover::after {
+        transform: scaleX(1);
+      }
+      .opening-card:active {
+        transform: translateY(0);
+      }
+
+      .opening-num {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--ink);
+        letter-spacing: 0.1em;
+        margin-bottom: 8px;
+        opacity: 0.7;
+      }
+
+      .opening-title {
+        font-family: 'Noto Serif SC', serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 4px;
+      }
+
+      .opening-meta {
+        font-size: 11px;
+        color: var(--dim);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .opening-meta .defense-tag {
+        display: inline-block;
+        padding: 1px 7px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 700;
+        background: var(--ink-s);
+        color: var(--ink);
+        border: 1px solid rgba(192, 57, 43, 0.18);
+      }
+
+      .opening-desc {
+        font-size: 12px;
+        color: var(--sub);
+        line-height: 1.65;
+      }
+
+      /* ── Discord ── */
+      .discord-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px;
+        background: #5865f2;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        transition: all 0.22s;
+        box-shadow: 0 3px 10px rgba(88, 101, 242, 0.28);
+      }
+      .discord-btn:hover {
+        background: #4752c4;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 14px rgba(88, 101, 242, 0.38);
+      }
+      .discord-btn:active {
+        transform: translateY(0);
+      }
+
+      .discord-sub {
+        font-size: 11px;
+        color: var(--dim);
+        text-align: center;
+        padding: 8px 14px 0;
+      }
+
+      /* ── Phần đáy ── */
+      .footer {
+        text-align: center;
+        padding: 24px 0 18px;
+        position: relative;
+      }
+      .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 25%;
+        right: 25%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-s), transparent);
+      }
+      .footer-text {
+        font-family: 'Noto Serif SC', serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--dim);
+        letter-spacing: 0.2em;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+      @keyframes dots {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 1.4em;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+        .opening-grid {
+          grid-template-columns: 1fr;
+        }
+        .page-wrap {
+          margin: 0;
+          border-radius: 0;
+          border: none;
+        }
+      }
+      @media (max-width: 480px) {
+        .opening-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+      <div class="top-bar"></div>
+      <div class="content">
+        <!-- Tiêu đề -->
+        <div class="hero">
+          <div class="hero-badge">Người mẹ nghiện tình dục</div>
+          <div class="hero-title">Tần Trừ Hoài</div>
+          <div class="hero-sub">Tác giả: emo的lsp</div>
+          <div class="hero-divider"></div>
+        </div>
+
+        <!-- Tuyên bố bản quyền -->
+        <div class="card">
+          <div class="card-header"><span class="dot dot-red"></span>Tuyên bố bản quyền</div>
+          <div class="card-body">
+            <div class="notice">
+              <strong>📌 Thẻ nhân vật này là miễn phí, vĩnh viễn cấm hành vi thương mại hóa.</strong> Nếu bạn có được thông qua việc mua bán, vui lòng hoàn tiền ngay lập tức và báo cáo kẻ bán hàng vô lương tâm cho nền tảng mua bán, để bảo vệ quyền lợi của người sáng tạo và chính bạn.
+            </div>
+          </div>
+        </div>
+
+        <!-- Tuyên bố đăng lại -->
+        <div class="card">
+          <div class="card-header"><span class="dot dot-red"></span>Tuyên bố đăng lại</div>
+          <div class="card-body">
+            <div class="notice">
+              <strong>⚠ Nghiêm cấm đăng lại tác phẩm này lên bất kỳ nền tảng nào khác khi chưa có sự cho phép rõ ràng của tác giả.</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ảnh chân dung hai nhân vật -->
+        <div class="card">
+          <div class="card-header"><span class="dot dot-warm"></span>Ảnh chân dung nhân vật xuất hiện</div>
+          <div class="gallery">
+            <!-- Tần Trừ Hoài -->
+            <div class="portrait-wrap">
+              <button
+                type="button"
+                class="portrait-btn"
+                data-state="default"
+                data-default-src="https://gitgud.io/opus5/other/-/raw/master/CG/秦抒怀1.jpg"
+                data-diff-src="https://gitgud.io/opus5/other/-/raw/master/CG/秦抒怀2.jpg"
+                data-default-alt="Ảnh chân dung mặc định Tần Trừ Hoài"
+                data-diff-alt="Ảnh chân dung khác biệt Tần Trừ Hoài"
+                onclick="flipPortrait(this)"
+                aria-label="Nhấp để chuyển đổi ảnh chân dung Tần Trừ Hoài"
+              >
+                <div class="portrait-viewport">
+                  <img
+                    class="portrait-img"
+                    src="https://gitgud.io/opus5/other/-/raw/master/CG/秦抒怀1.jpg"
+                    alt="Ảnh chân dung mặc định Tần Trừ Hoài"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                  />
+                  <div class="portrait-tag">Nhấp để lật trang</div>
+                  <div class="portrait-loading">Đang chuyển đổi<span class="portrait-loading-dots"></span></div>
+                </div>
+              </button>
+              <div class="portrait-caption">
+                <div class="portrait-name">Tần Trừ Hoài</div>
+                40 tuổi · Đội phó đội cảnh sát hình sự · Mẹ đơn thân
+              </div>
+            </div>
+
+            <!-- Khương Nam Nhứ -->
+            <div class="portrait-wrap">
+              <button
+                type="button"
+                class="portrait-btn"
+                data-state="default"
+                data-default-src="https://gitgud.io/opus5/other/-/raw/master/CG/姜南絮1.jpg"
+                data-diff-src="https://gitgud.io/opus5/other/-/raw/master/CG/姜南絮2.jpg"
+                data-default-alt="Ảnh chân dung mặc định Khương Nam Nhứ"
+                data-diff-alt="Ảnh chân dung khác biệt Khương Nam Nhứ"
+                onclick="flipPortrait(this)"
+                aria-label="Nhấp để chuyển đổi ảnh chân dung Khương Nam Nhứ"
+              >
+                <div class="portrait-viewport">
+                  <img
+                    class="portrait-img"
+                    src="https://gitgud.io/opus5/other/-/raw/master/CG/姜南絮1.jpg"
+                    alt="Ảnh chân dung mặc định Khương Nam Nhứ"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                  />
+                  <div class="portrait-tag">Nhấp để lật trang</div>
+                  <div class="portrait-loading">Đang chuyển đổi<span class="portrait-loading-dots"></span></div>
+                </div>
+              </button>
+              <div class="portrait-caption">
+                <div class="portrait-name">Khương Nam Nhứ</div>
+                20 tuổi · Khoa tiếng Trung Đại học Phục Đán · Bạn gái của {{user}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Giới thiệu nhân vật -->
+        <div class="card">
+          <div class="card-header"><span class="dot dot-warm"></span>Giới thiệu nhân vật</div>
+          <div>
+            <div class="info-row">
+              <span class="info-key">Tần Trừ Hoài · Mẹ</span>
+              <span class="info-val">40 tuổi, Đội phó đội cảnh sát hình sự cục thành phố, ngoài cứng trong mềm, một mình gánh vác bí mật về di chứng của thuốc, chưa từng nói với ai</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Khương Nam Nhứ · Bạn gái</span>
+              <span class="info-val">20 tuổi, Hoa khôi khoa tiếng Trung Đại học Phục Đán, dịu dàng chu đáo, ánh trăng sáng của {{user}}, lần đầu tiên yêu đương</span>
+            </div>
+            <div class="info-row">
+              <span class="info-key">Phòng tuyến tâm lý</span>
+              <span class="info-val"
+                >0—200, phản ánh sự giằng xé của Tần Trừ Hoài giữa tôn nghiêm người mẹ, bản năng cơ thể và sự quyến luyến với người thân duy nhất——chỉ số càng cao, phòng tuyến càng gần mức sụp đổ</span
+              >
+            </div>
+            <div class="info-row">
+              <span class="info-key">Địa điểm câu chuyện</span>
+              <span class="info-val">Thượng Hải · Trong nhà / Khuôn viên Đại học Phục Đán</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lời mở đầu -->
+        <div class="card">
+          <div class="card-header"><span class="dot dot-warm"></span>Bắt đầu câu chuyện</div>
+          <div class="opening-grid">
+            <div class="opening-card" onclick="switchToOpening(1)">
+              <div class="opening-num">OPENING · 01</div>
+              <div class="opening-title">Tiếng động lạ đêm khuya</div>
+              <div class="opening-meta">
+                Trong nhà
+                <span class="defense-tag">Phòng tuyến 0</span>
+              </div>
+              <div class="opening-desc">Đêm khuya, bạn nghe thấy âm thanh kỳ lạ phát ra từ phòng ngủ của mẹ, vẫn chưa phát hiện ra sự thật……</div>
+            </div>
+
+            <div class="opening-card" onclick="switchToOpening(2)">
+              <div class="opening-num">OPENING · 02</div>
+              <div class="opening-title">Thường ngày ở trường</div>
+              <div class="opening-meta">
+                Trường học
+                <span class="defense-tag">Phòng tuyến 100</span>
+              </div>
+              <div class="opening-desc">Buổi chiều đầy nắng, những ngày tháng yêu đương thường nhật của bạn và Nam Nhứ trong khuôn viên trường, mọi thứ vẫn còn rất tươi đẹp.</div>
+            </div>
+
+            <div class="opening-card" onclick="switchToOpening(3)">
+              <div class="opening-num">OPENING · 03</div>
+              <div class="opening-title">Đêm vượt giới hạn</div>
+              <div class="opening-meta">
+                Trong nhà
+                <span class="defense-tag">Phòng tuyến 190</span>
+              </div>
+              <div class="opening-desc">Phòng tuyến đã gần sụp đổ, khoảng cách giữa bạn và mẹ đang biến mất theo một cách không thể cứu vãn.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tham gia cộng đồng -->
+        <div class="card">
+          <div class="card-header"><span class="dot dot-muted"></span>Tham gia cộng đồng</div>
+          <div class="card-body">
+            <div class="discord-btn" onclick="openDiscordWithConfirm()">💬 Tham gia máy chủ Discord</div>
+            <div class="discord-sub">Phát hành thẻ sẽ có thông báo, chào mừng tham gia trò chuyện——liên quan đến quán rượu SillyTavern... hoặc nhiều hơn nữa...</div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-text">Hồ sơ đã niêm phong, câu chuyện còn tiếp</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function flipPortrait(btn) {
+        if (btn.dataset.busy === 'true') return;
+        const img = btn.querySelector('.portrait-img');
+        const isDefault = btn.dataset.state !== 'diff';
+        const nextState = isDefault ? 'diff' : 'default';
+        const nextSrc = nextState === 'default' ? btn.dataset.defaultSrc : btn.dataset.diffSrc;
+        const nextAlt = nextState === 'default' ? btn.dataset.defaultAlt : btn.dataset.diffAlt;
+
+        btn.dataset.busy = 'true';
+        btn.classList.add('is-flipping');
+
+        window.setTimeout(() => {
+          btn.dataset.state = nextState;
+          img.src = nextSrc;
+          img.alt = nextAlt;
+          window.setTimeout(() => {
+            btn.classList.remove('is-flipping');
+            btn.dataset.busy = 'false';
+          }, 420);
+        }, 520);
+      }
+
+      function openDiscordWithConfirm() {
+        if (confirm('Sắp chuyển hướng đến máy chủ Discord, có tiếp tục không?')) {
+          window.open('https://discord.gg/x3aKHgfE3u', '_blank');
+        }
+      }
+
+      async function switchToOpening(swipeId) {
+        const card = event.currentTarget;
+        if (card) {
+          card.style.opacity = '0.5';
+          card.style.pointerEvents = 'none';
+        }
+        try {
+          const messages = await getChatMessages('0', { include_swipe: true });
+          if (messages && messages[0].swipes && messages[0].swipes[swipeId]) {
+            await setChatMessage(messages[0].swipes[swipeId], 0, {
+              swipe_id: swipeId,
+              refresh: 'display_and_render_current',
+            });
+          } else {
+            throw new Error(`Lời mở đầu ${swipeId + 1} không tìm thấy, vui lòng đảm bảo đã thêm tất cả lời mở đầu theo thứ tự.`);
+          }
+        } catch (err) {
+          console.error('Chuyển đổi lời mở đầu thất bại:', err);
+          alert(`Chuyển đổi thất bại: ${err.message}`);
+          if (card) {
+            card.style.opacity = '1';
+            card.style.pointerEvents = 'auto';
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
+```
